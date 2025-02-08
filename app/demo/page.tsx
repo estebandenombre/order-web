@@ -1,26 +1,15 @@
 "use client"
 
-import { useState } from "react"
+
 import Link from "next/link"
-import { ArrowLeft, PlayCircle } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Video } from "@/components/ui/video"
 
 export default function DemoPage() {
-    const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
-    const handlePlayPause = () => {
-        setIsVideoPlaying(!isVideoPlaying)
-        const video = document.querySelector("video")
-        if (video) {
-            if (isVideoPlaying) {
-                video.pause()
-            } else {
-                video.play()
-            }
-        }
-    }
+
 
     return (
         <div className="container mx-auto px-4 py-8 md:py-16">
@@ -34,7 +23,6 @@ export default function DemoPage() {
                 <CardContent className="space-y-6">
                     <div className="relative">
                         <Video src="/demo.mp4" poster="/placeholder.svg?height=400&width=800" />
-
                     </div>
                     <div className="space-y-4">
                         <h2 className="text-2xl font-semibold">Características destacadas:</h2>
