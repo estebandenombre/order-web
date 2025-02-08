@@ -3,7 +3,12 @@
 import { revalidatePath } from "next/cache"
 import clientPromise from "@/lib/mongodb"
 
-export async function submitForm(prevState: any, formData: FormData): Promise<void> {
+type FormState = {
+    success: boolean;
+    message: string;
+} | null;
+
+export async function submitForm(prevState: FormState, formData: FormData): Promise<{ success: boolean; message: string }> {
     try {
         const client = await clientPromise
         const db = client.db("restaurantOS")
@@ -28,10 +33,10 @@ export async function submitForm(prevState: any, formData: FormData): Promise<vo
 
         await db.collection("contactForms").insertOne(data)
 
-        revalidatePath("/contacto")
+        revalidatePath('/contacto')
+        return { success: true, message: 'Formulario enviado con éxito' }
     } catch (e) {
         console.error(e)
-        throw new Error("Error al enviar el formulario")
+        return { success: false, message: 'Error al enviar el formulario' }
     }
 }
-

@@ -19,6 +19,8 @@ export default function ContactPage() {
     const [state, formAction] = useActionState(submitForm, null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [formStatus, setFormStatus] = useState<{ type: "success" | "error"; message: string } | null>(null)
+    console.log(state);
+
 
     const handleSubmit = async (formData: FormData) => {
         setIsSubmitting(true)
@@ -32,7 +34,7 @@ export default function ContactPage() {
         } catch (error) {
             setFormStatus({
                 type: "error",
-                message: "Hubo un problema al enviar el formulario. Por favor, inténtalo de nuevo.",
+                message: "Hubo un problema al enviar el formulario. Por favor, inténtalo de nuevo. " + error,
             })
         } finally {
             setIsSubmitting(false)

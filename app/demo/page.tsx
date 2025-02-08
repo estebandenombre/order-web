@@ -8,13 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Video } from "@/components/ui/video"
 
 export default function DemoPage() {
-    const [isPlaying, setIsPlaying] = useState(false)
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
     const handlePlayPause = () => {
-        setIsPlaying(!isPlaying)
+        setIsVideoPlaying(!isVideoPlaying)
         const video = document.querySelector("video")
         if (video) {
-            if (isPlaying) {
+            if (isVideoPlaying) {
                 video.pause()
             } else {
                 video.play()
@@ -24,7 +24,7 @@ export default function DemoPage() {
 
     return (
         <div className="container mx-auto px-4 py-8 md:py-16">
-            <Card className="w-full mx-auto">
+            <Card className="w-full max-w-4xl mx-auto">
                 <CardHeader className="text-center">
                     <CardTitle className="text-3xl font-bold">Demostración de RestaurantOS</CardTitle>
                     <CardDescription>
@@ -33,9 +33,30 @@ export default function DemoPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <div className="relative">
-                        <Video src="/demo.mp4" />
+                        <Video src="/placeholder-video.mp4" poster="/placeholder.svg?height=400&width=800" />
+                        <Button
+                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                            size="lg"
+                            onClick={handlePlayPause}
+                        >
+                            <PlayCircle className="mr-2 h-6 w-6" />
+                            {isVideoPlaying ? "Pausar" : "Reproducir"}
+                        </Button>
+                    </div>
+                    <div className="space-y-4">
+                        <h2 className="text-2xl font-semibold">Características destacadas:</h2>
+                        <ul className="list-disc list-inside space-y-2">
+                            <li>Gestión de pedidos en tiempo real</li>
+                            <li>Personalización del menú digital</li>
+                            <li>Integración con sistemas de pago</li>
+                            <li>Análisis de ventas y tendencias</li>
+                            <li>Gestión de inventario y proveedores</li>
+                        </ul>
                     </div>
                     <div className="flex justify-center space-x-4">
+                        <Button asChild>
+                            <Link href="/register">Comenzar prueba gratuita</Link>
+                        </Button>
                         <Button variant="outline" asChild>
                             <Link href="/contacto">Solicitar más información</Link>
                         </Button>
